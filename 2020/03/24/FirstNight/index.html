@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端框架现状及对比1. 下面通过表格说明：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq3399013670&#x2F;article&#x2F;details&#x2F;90576706 1) React 2) Angular 3) Vue 2. 与其它前端 JS 框架的关联1) 借鉴 angular 的模板和数据绑定技术  2) 借鉴 react 的组件化和虚拟 DOM 技术Vue基本介绍及入门官网：https:&#x2F;&#x2F;vu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue + elementUI 的快速学习">
+<meta property="og:url" content="http://yoursite.com/2020/03/24/FirstNight/index.html">
+<meta property="og:site_name" content="luckfairy1 的9维空间">
+<meta property="og:description" content="前端框架现状及对比1. 下面通过表格说明：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq3399013670&#x2F;article&#x2F;details&#x2F;90576706 1) React 2) Angular 3) Vue 2. 与其它前端 JS 框架的关联1) 借鉴 angular 的模板和数据绑定技术  2) 借鉴 react 的组件化和虚拟 DOM 技术Vue基本介绍及入门官网：https:&#x2F;&#x2F;vu">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/FirstNight/js-different.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/FirstNight/design.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/FirstNight/vscode.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/FirstNight/vue-cli.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/FirstNight/catalog.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/FirstNight/data-driven.png">
+<meta property="article:published_time" content="2020-03-24T02:03:33.000Z">
+<meta property="article:modified_time" content="2020-03-24T05:42:27.659Z">
+<meta property="article:author" content="luckfairy1">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/24/FirstNight/js-different.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/24/FirstNight/"/>
+
+
+
+
+
+  <title>vue + elementUI 的快速学习 | luckfairy1 的9维空间</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">luckfairy1 的9维空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/FirstNight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luckfairy1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luckfairy1 的9维空间">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue + elementUI 的快速学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-24T10:03:33+08:00">
+                2020-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前端框架现状及对比"><a href="#前端框架现状及对比" class="headerlink" title="前端框架现状及对比"></a>前端框架现状及对比</h2><h3 id="1-下面通过表格说明："><a href="#1-下面通过表格说明：" class="headerlink" title="1. 下面通过表格说明："></a>1. 下面通过表格说明：</h3><p><a href="https://blog.csdn.net/qq3399013670/article/details/90576706" target="_blank" rel="noopener">https://blog.csdn.net/qq3399013670/article/details/90576706</a></p>
+<pre><code>1) React
+2) Angular
+3) Vue</code></pre><p><img src="/2020/03/24/FirstNight/js-different.jpg" alt="js-different"></p>
+<h3 id="2-与其它前端-JS-框架的关联"><a href="#2-与其它前端-JS-框架的关联" class="headerlink" title="2. 与其它前端 JS 框架的关联"></a>2. 与其它前端 JS 框架的关联</h3><pre><code>1) 借鉴 angular 的模板和数据绑定技术 
+2) 借鉴 react 的组件化和虚拟 DOM 技术</code></pre><h2 id="Vue基本介绍及入门"><a href="#Vue基本介绍及入门" class="headerlink" title="Vue基本介绍及入门"></a>Vue基本介绍及入门</h2><p>官网：<a href="https://vuejs.org/" target="_blank" rel="noopener">https://vuejs.org/</a></p>
+<h3 id="1-介绍描述"><a href="#1-介绍描述" class="headerlink" title="1. 介绍描述"></a>1. 介绍描述</h3><pre><code>1) 渐进式 JavaScript 框架
+2) 作者: 尤雨溪(一位华裔前 Google 工程师)
+3) 作用: 动态构建用户界面</code></pre><h3 id="2-Vue-的特点"><a href="#2-Vue-的特点" class="headerlink" title="2. Vue 的特点"></a>2. Vue 的特点</h3><pre><code>1) 遵循 MVVM（Model-View-ViewModel） 模式
+2) 编码简洁, 体积小, 运行效率高, 适合移动/PC 端开发
+3) 它本身只关注 UI, 可以轻松引入 vue 插件或其它第三库开发项目</code></pre><p><img src="/2020/03/24/FirstNight/design.png" alt="design"></p>
+<p>View就是DOM层,ViewModel就是通过new Vue()的实例对象,Model是原生js。开发者修改了DOM,ViewModel对修改的行为进行监听,监听到了后去更改Model层的数据,然后再通过ViewModel去改变View,从而达到自动同步。</p>
+<h3 id="3-环境准备"><a href="#3-环境准备" class="headerlink" title="3. 环境准备"></a>3. 环境准备</h3><ul>
+<li><p>1、IDE</p>
+<ul>
+<li><p>下载vscode <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">https://code.visualstudio.com/</a></p>
+<p><img src="/2020/03/24/FirstNight/vscode.png" alt="vscode"></p>
+</li>
+<li><p>正常安装即可</p>
+</li>
+<li><p>打开软件,选择扩展,搜索并安装 Vuter 插件</p>
+</li>
+</ul>
+</li>
+<li><p>2、浏览器</p>
+<ul>
+<li>下载chrome <a href="https://www.google.cn/intl/zh-CN/chrome/" target="_blank" rel="noopener">https://www.google.cn/intl/zh-CN/chrome/</a></li>
+<li>正常安装即可</li>
+</ul>
+</li>
+<li><p>3、浏览器插件</p>
+<ul>
+<li>vue devtools <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd</a></li>
+<li>需要翻墙</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-开发环境的搭建"><a href="#4-开发环境的搭建" class="headerlink" title="4. 开发环境的搭建"></a>4. 开发环境的搭建</h3><ul>
+<li><p>什么是node.js?</p>
+<p>  Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。</p>
+</li>
+<li><p>1、安装node.js（<a href="https://nodejs.org/en/）" target="_blank" rel="noopener">https://nodejs.org/en/）</a></p>
+<p> 打开命令行工具：node –version 如果出现版本号，说明已安装。</p>
+</li>
+<li><p>什么是npm</p>
+<p>npm 是 JavaScript 世界的包管理工具,并且是 Node.js平台的默认包管理工具。</p>
+</li>
+<li><p>2、安装npm</p>
+<p>我们安装node.js，会默认安装npm;</p>
+</li>
+<li><p>3、安装cnpm</p>
+<p>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>cnpm的官网：<a href="http://npm.taobao.org/" target="_blank" rel="noopener">http://npm.taobao.org/</a></p>
+</li>
+<li><p>什么是vue-cli</p>
+<p>vue-cli 是vue的脚手架工具，可以帮你快速自动生成一个模板工程。</p>
+<p><img src="/2020/03/24/FirstNight/vue-cli.png" alt="vue-cli"></p>
+</li>
+<li><p>4、安装vue-cli3</p>
+<p>npm install -g @vue/cli</p>
+<p>vue -V  如果出现版本号，说明已安装。</p>
+<p>vue-cli的官网：<a href="https://cli.vuejs.org/zh/" target="_blank" rel="noopener">https://cli.vuejs.org/zh/</a>  </p>
+</li>
+<li><p>5、创建项目</p>
+<p>vue create my-project</p>
+</li>
+</ul>
+<h3 id="5-Vue项目目录结构"><a href="#5-Vue项目目录结构" class="headerlink" title="5. Vue项目目录结构"></a>5. Vue项目目录结构</h3><p> <img src="/2020/03/24/FirstNight/catalog.png" alt="catalog"></p>
+<ul>
+<li>node_modules npm加载的项目依赖模块</li>
+<li>public 公共文件<ul>
+<li>favicon.ico 项目ico图标</li>
+<li>index.html 项目打包时会以该文件为母板</li>
+</ul>
+</li>
+<li>src 资源文件夹<ul>
+<li>assets 资源文件夹，存放图片之类的资源</li>
+<li>components 组件文件夹，自己写的组件都放在这个文件夹下</li>
+<li>views 我们所写的页面都放在这里</li>
+<li>App.vue 应用组件，所有自己写的组件都是在这个组件之上运行</li>
+<li>main.js webpack入口文件</li>
+<li>router.js 路由文件夹，决定了页面的跳转规则</li>
+<li>store.js vuex状态管理文件</li>
+</ul>
+</li>
+<li>package.json 项目配置文件。</li>
+<li>README.md 项目的说明文档，markdown 格式</li>
+<li>vue.config.js【如果没有，请手动创建】</li>
+</ul>
+<h2 id="Vue基础学习"><a href="#Vue基础学习" class="headerlink" title="Vue基础学习"></a>Vue基础学习</h2><h3 id="Vue-核心思想"><a href="#Vue-核心思想" class="headerlink" title="Vue 核心思想"></a>Vue 核心思想</h3><h4 id="1-数据驱动（数据双向绑定）"><a href="#1-数据驱动（数据双向绑定）" class="headerlink" title="1. 数据驱动（数据双向绑定）"></a>1. 数据驱动（数据双向绑定）</h4><p><img src="/2020/03/24/FirstNight/data-driven.png" alt="data-driven"></p>
+<p>在Vue中，Directives对view进行了封装，当model中的数据发生变化时，Vue就会通过Directives指令去修改DOM，同时也通过DOM Listener实现对视图view的监听，当DOM改变时，就会被监听到，实现model的改变，从而实现数据的双向绑定。</p>
+<h4 id="2-组件化"><a href="#2-组件化" class="headerlink" title="2. 组件化"></a>2. 组件化</h4><pre><code>1) 页面上每个独立的可视/可交互区域视为一个组件。
+2) 每个组件对应一个工程目录，组件所需的各种资源在这个目录下就近维护。
+3) 页面不过是组件的容器，组件可以嵌套自由组合形成完整的页面</code></pre><h4 id="3-Vue-扩展插件"><a href="#3-Vue-扩展插件" class="headerlink" title="3.Vue 扩展插件"></a>3.Vue 扩展插件</h4><pre><code>1) vue-cli:vue 脚手架
+
+2) vue-resource(axios):ajax 请求
+
+3) vue-router: 路由
+
+4) vuex: 状态管理
+
+5) vue-lazyload: 图片懒加载
+
+6) vue-scroller: 页面滑动相关
+
+7) mint-ui: 基于 vue 的 UI 组件库(移动端)
+
+8) element-ui: 基于 vue 的 UI 组件库(PC 端)</code></pre><h4 id="4-Vue-项目构建命令"><a href="#4-Vue-项目构建命令" class="headerlink" title="4.Vue 项目构建命令"></a>4.Vue 项目构建命令</h4><pre><code>npm  install  安装项目依赖包
+
+npm  run dev/npm  run  serve  启动项目</code></pre><h4 id="5-Vue-常用指令"><a href="#5-Vue-常用指令" class="headerlink" title="5.Vue 常用指令"></a>5.Vue 常用指令</h4><p>v-model 双向绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; value&#x3D;&quot;默认值&quot; v-model&#x3D;&quot;firstipt&quot; &#x2F;&gt;</span><br><span class="line">&lt;p&gt;&#123;&#123; firstipt &#125;&#125;&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<p>v-text<br>v-html<br>v-bind<br>  可以绑定html标签的任何一个属性<br>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;#&quot; v-html&#x3D;&quot;msg&quot; v-bind:title&#x3D;&quot;tip&quot; v-bind:pid&#x3D;&quot;id&quot;&gt;&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>v-if 条件判断 绑定一个boolean值，如果为true输出，如果为false则不输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span v-if&#x3D;&quot;isOK&quot; v-text&#x3D;&quot;msg&quot;&gt;&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+<p>v-show   绑定一个boolean值，如果为true显示，如果为false则不显示display:none</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span v-show&#x3D;&quot;isOK&quot; v-text&#x3D;&quot;msg&quot;&gt;&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+<p>v-for 循环遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一种写法</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li v-for&#x3D;&quot;item in names&quot;&gt;</span><br><span class="line">		&#123;&#123;item&#125;&#125;</span><br><span class="line">		&lt;span v-text&#x3D;&quot;item&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">	&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line">&#x2F;&#x2F;第二种写法 设置唯一标示</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li v-for&#x3D;&quot;(item,index) in names&quot; :key&#x3D;&quot;index&quot;&gt;</span><br><span class="line">		&#123;&#123;index&#125;&#125; &#123;&#123;item&#125;&#125;</span><br><span class="line">		&lt;span v-text&#x3D;&quot;item&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">	&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三种写法 遍历对象   :key&#x3D;&quot;item.id&quot;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li v-for&#x3D;&quot;(item,key,index) in user&quot; :key&#x3D;&quot;index&quot;&gt;</span><br><span class="line">		&#123;&#123;index&#125;&#125; &#123;&#123;key&#125;&#125; &#123;&#123;item&#125;&#125;</span><br><span class="line">	&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+<p>v-on 注册事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button v-on:click&#x3D;&quot;btnClick&quot;&gt; 显示或隐藏 &lt;&#x2F;button&gt; </span><br><span class="line">&#x2F;&#x2F;简写 </span><br><span class="line">&lt;button @click&#x3D;&quot;btnClick&quot;&gt; 显示或隐藏 &lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;script中添加执行的方法</span><br><span class="line">export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            firstipt: &quot;&quot;,</span><br><span class="line">            msg: &#39;&lt;b&gt;Hello Vue&lt;&#x2F;b&gt;&#39;,</span><br><span class="line">            tip: &#39;这是一个提示&#39;,</span><br><span class="line">            isOK: false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        btnClick() &#123;</span><br><span class="line">            this.isOK &#x3D; !this.isOK;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="指令的两个缩写"><a href="#指令的两个缩写" class="headerlink" title="指令的两个缩写"></a>指令的两个缩写</h4><pre><code>1) v-on:click --&gt; @click 
+2) v-bind:id --&gt; :id</code></pre><h2 id="Vue进阶学习"><a href="#Vue进阶学习" class="headerlink" title="Vue进阶学习"></a>Vue进阶学习</h2><h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
+<li><p>组件的好处：可以重复使用</p>
+</li>
+<li><p>组件的组成</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &#x2F;&#x2F;编写html代码</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;注意：在vue2.x以后 template只能有一个根节点</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F;导入其它模块&#x2F;组件&#x2F;文件(css&#x2F;字体文件等)</span><br><span class="line">    &#x2F;&#x2F;导出组件</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                greeting: &#39;hello world&#39;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    &#x2F;&#x2F;编写样式</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>组件的使用</p>
+<ul>
+<li>页面上的使用<ul>
+<li>页面模板中增加  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;home&quot;&gt;</span><br><span class="line">        &lt;img alt&#x3D;&quot;Vue logo&quot; src&#x3D;&quot;..&#x2F;assets&#x2F;logo.png&quot;&gt;</span><br><span class="line">        &lt;HelloWorld msg&#x3D;&quot;Welcome to Your Vue.js App&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; @ is an alias to &#x2F;src</span><br><span class="line">    import HelloWorld from &#39;@&#x2F;components&#x2F;HelloWorld.vue&#39;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &#39;home&#39;,</span><br><span class="line">        components: &#123;</span><br><span class="line">            HelloWorld</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>router.js中加载vue组件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>父子组件通信</p>
+<ul>
+<li><p>Vue对象的相关参数</p>
+<pre><code>data        提供的模型，为v-指令提供数据
+methods     所有事件和逻辑方法定义在这里，获取data中的数据使用this.msg
+components  在一个组件中使用另一个组件
+props       写在子组件中，用于接受父组件传入的数据
+created    创建前
+mounted    挂在后
+computed   计算属性</code></pre></li>
+<li><p>在父组件中使用子组件</p>
+<ul>
+<li>1.导入子组件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import child from &#39;.&#x2F;child.vue&#39;</span><br></pre></td></tr></table></figure></li>
+<li>2.设置子组件  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components: &#123;</span><br><span class="line">    childView:child</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>3.使用子组件  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;childView&gt;&lt;&#x2F;childView&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>父组件给子组件传值</p>
+<ul>
+<li>1.data中添加值  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pid: 5</span><br></pre></td></tr></table></figure></li>
+<li>2.子组件绑定值  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;childView :pidTest&#x3D;&quot;pid&quot;&gt;&lt;&#x2F;childView&gt;</span><br></pre></td></tr></table></figure></li>
+<li>3.子组件中接收值  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props: [&#39;pidTest&#39;]</span><br></pre></td></tr></table></figure></li>
+<li>4.子组件中显示值  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;pidTest&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Vue路由（Vue-Router"><a href="#Vue路由（Vue-Router" class="headerlink" title="Vue路由（Vue-Router)"></a>Vue路由（Vue-Router)</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>官网：<a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">https://router.vuejs.org/zh/</a></p>
+</li>
+<li><p>作用：控制页面的局部跳转刷新，相当于MVC框架中的controller中的@requestMapping注解配置跳转页面</p>
+<p> 路由配置文件在项目中的src目录下</p>
+</li>
+<li><p>前端路由</p>
+<p>  根据不同的url(仅仅是#号后面不同)，加载不同的vue组件</p>
+</li>
+<li><p>路由规则</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#&#x2F;news&#x2F;detail&#x2F;13</span><br><span class="line">#&#x2F;Home</span><br><span class="line">#&#x2F;Home&#x2F;news</span><br><span class="line"></span><br><span class="line">#&#x2F;Home&#x2F;news&#x2F;:id   要传递一个id的值</span><br><span class="line">#&#x2F;Home&#x2F;news&#x2F;13</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装vue-router模块</p>
+<p>  cnpm install vue-router –save</p>
+</li>
+<li><p>在入口文件中导入vue-router模块</p>
+<p>  import vueRouter from ‘vue-router’</p>
+</li>
+<li><p>使用vue-router</p>
+<p>  Vue.use(vueRouter)</p>
+</li>
+<li><p>配置路由规则</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let router &#x3D; new vueRouter(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">        &#123;name: &#39;路由规则的名称，可以省略&#39;, path:&#39;路由规则的形式&#39;, component: vue组件&#125;,</span><br><span class="line">        &#123;name: &#39;login&#39;, path: &#39;&#x2F;Account&#x2F;login&#39;, component: login&#125;,</span><br><span class="line">        &#123;name: &#39;register&#39;, path: &#39;&#x2F;Account&#x2F;register&#39;, component: register&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>使用路由规则</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    router: router,</span><br><span class="line">    render: c &#x3D;&gt; c(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路由文件中的代码（router.js）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39; &#x2F;&#x2F;从node_modules中加载vue模块</span><br><span class="line">import Router from &#39;vue-router&#39;</span><br><span class="line"></span><br><span class="line">import Login from &#39;.&#x2F;components&#x2F;login.vue&#39;</span><br><span class="line">import Register from &#39;.&#x2F;components&#x2F;register.vue&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(vueRouter);</span><br><span class="line">export default new Router(&#123;</span><br><span class="line">routes: [</span><br><span class="line">    &#123;</span><br><span class="line">    path: &#39;&#x2F;Account&#x2F;login&#39;,</span><br><span class="line">    name: &#39;login&#39;,</span><br><span class="line">    component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    path: &#39;&#x2F;Account&#x2F;register&#39;,</span><br><span class="line">    name: &#39;register&#39;,</span><br><span class="line">    component: () &#x3D;&gt; import(&#x2F;* webpackChunkName: &quot;about&quot; *&#x2F; &#39;.&#x2F;components&#x2F;register.vue&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>App.vue中设置路由对应组件的站位</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 路由匹配的组件要渲染到这里 --&gt;</span><br><span class="line">&lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>更改a标签为 router-link</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to&#x3D;&quot;&#x2F;Account&#x2F;login&quot;&gt;登录&lt;&#x2F;router-link&gt;</span><br><span class="line">&lt;router-link to&#x3D;&quot;&#x2F;Account&#x2F;register&quot;&gt;注册&lt;&#x2F;router-link&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路由参数</p>
+<ul>
+<li>1.传递参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to&#x3D;&quot;&#x2F;Account&#x2F;login&#x2F;13&quot;&gt;登录&lt;&#x2F;router-link&gt;</span><br></pre></td></tr></table></figure></li>
+<li>2.修改路由规则<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;name: &#39;login&#39;, path: &#39;&#x2F;Account&#x2F;login&#x2F;:id&#39;, component: Login&#125;</span><br></pre></td></tr></table></figure></li>
+<li>3.接收参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;this.$route.params.id&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="过滤器和计算属性"><a href="#过滤器和计算属性" class="headerlink" title="过滤器和计算属性"></a>过滤器和计算属性</h3><h4 id="私有过滤器"><a href="#私有过滤器" class="headerlink" title="私有过滤器"></a>私有过滤器</h4></li>
+</ul>
+</li>
+<li><p>添加过滤器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123;</span><br><span class="line">    tolowercase: function(input) &#123;</span><br><span class="line">        return input.toLowerCase();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用过滤器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;msg | tolowercase&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>  默认会把msg传入到tolowercase方法的第一个参数的位置</p>
+</li>
+<li><p>传入更多参数</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123;</span><br><span class="line">    tolowercase: function(input) &#123;</span><br><span class="line">        return input.toLowerCase();</span><br><span class="line">    &#125;,</span><br><span class="line">    replaceStr: function(input, r) &#123;</span><br><span class="line">        var re &#x3D; new RegExp(r, &quot;gi&quot;);  </span><br><span class="line">        return input.replace(re, &#39;&#39;);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&#123;&#123;msg | tolowercase | replaceStr(&#39;v&#39;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="全局过滤器"><a href="#全局过滤器" class="headerlink" title="全局过滤器"></a>全局过滤器</h4></li>
+<li><p>入口文件中</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全局过滤器</span><br><span class="line">Vue.filter(&#39;tolowercase1&#39;, function(input) &#123;</span><br><span class="line">    return input.toLowerCase();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Vue.filter(&#39;replaceStr1&#39;, function(input, r) &#123;</span><br><span class="line">    var re &#x3D; new RegExp(r, &quot;gi&quot;);  </span><br><span class="line">    return input.replace(re, &#39;&#39;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>使用过滤器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;msg | tolowercase1 | replaceStr1(&#39;a&#39;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h4></li>
+<li><p>设置计算属性</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    tolowercase() &#123;</span><br><span class="line">        return this.msg.toLowerCase();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用计算属性</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;tolowercase&#125;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>计算属性注意</p>
+<ul>
+<li>计算属性不可以带参数，如果要设置参数请使用过滤器</li>
+<li>计算属性内部要使用data中的数据</li>
+<li>当data中的数据发生变化会自动调用计算属性</li>
+</ul>
+</li>
+</ul>
+<h3 id="Axios的使用"><a href="#Axios的使用" class="headerlink" title="Axios的使用"></a>Axios的使用</h3><ul>
+<li><p>官网：<a href="http://www.axios-js.com/zh-cn/" target="_blank" rel="noopener">http://www.axios-js.com/zh-cn/</a></p>
+</li>
+<li><p>什么是Axios？</p>
+<ul>
+<li>是一个基于Promise 用于浏览器和 nodejs 的 HTTP 客户端，本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范</li>
+</ul>
+</li>
+<li><p>特性</p>
+<ul>
+<li>1.从浏览器中创建 XMLHttpRequest</li>
+<li>2.支持 Promise API</li>
+<li>3.客户端支持防止CSRF</li>
+<li>4.提供了一些并发请求的接口（重要，方便了很多的操作）</li>
+<li>5.从 node.js 创建 http 请求</li>
+<li>6.拦截请求和响应</li>
+<li>7.转换请求和响应数据</li>
+<li>8.取消请求</li>
+<li>9.自动转换JSON数据</li>
+</ul>
+<p>PS: 防止CSRF: 就是让你的每个请求都带一个从cookie中拿到的key, 根据浏览器同源策略，假冒的网站是拿不到你cookie中得key的，这样，后台就可以轻松辨别出这个请求是否是用户在假冒网站上的误导输入，从而采取正确的策略。</p>
+</li>
+<li><p>安装<br>  npm install –save axios vue-axios</p>
+</li>
+<li><p>基本使用</p>
+<ul>
+<li>入口文件中导入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br></pre></td></tr></table></figure></li>
+<li>使用方式（3种）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Vue.axios.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">    console.log(response.data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">this.axios.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">    console.log(response.data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">    console.log(response.data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>案例</p>
+<ul>
+<li>执行 GET 请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 为给定 ID 的 user 创建请求</span><br><span class="line">axios.get(&#39;&#x2F;user?ID&#x3D;12345&#39;).then(function (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">    console.log(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 上面的请求也可以这样做</span><br><span class="line">axios.get(&#39;&#x2F;user&#39;, &#123;</span><br><span class="line">    params: &#123;</span><br><span class="line">    ID: 12345</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).then(function (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">    console.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>执行 POST 请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">axios.post(&#39;&#x2F;user&#39;, &#123;</span><br><span class="line">    firstName: &#39;Fred&#39;,</span><br><span class="line">    lastName: &#39;Flintstone&#39;</span><br><span class="line">&#125;).then(function (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">    console.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>执行多个并发请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function getUserAccount() &#123;</span><br><span class="line">    return axios.get(&#39;&#x2F;user&#x2F;12345&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getUserPermissions() &#123;</span><br><span class="line">    return axios.get(&#39;&#x2F;user&#x2F;12345&#x2F;permissions&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">axios.all([getUserAccount(), getUserPermissions()]).then(axios.spread(function (acct, perms) &#123;</span><br><span class="line">    &#x2F;&#x2F; 两个请求现在都执行完成</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="UI框架"><a href="#UI框架" class="headerlink" title="UI框架"></a>UI框架</h2><h3 id="element-ui-饿了么开发的vue的UI组件"><a href="#element-ui-饿了么开发的vue的UI组件" class="headerlink" title="element-ui(饿了么开发的vue的UI组件)"></a>element-ui(饿了么开发的vue的UI组件)</h3><h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ul>
+<li><p>文档<br><a href="https://element.eleme.cn/#/zh-CN" target="_blank" rel="noopener">https://element.eleme.cn/#/zh-CN</a></p>
+</li>
+<li><p>下载<br>npm i element-ui -S</p>
+</li>
+<li><p>加载全部组件</p>
+<ul>
+<li>main.js文件中配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import ElementUI from &#39;element-ui&#39;</span><br><span class="line">import &#39;element-ui&#x2F;lib&#x2F;theme-chalk&#x2F;index.css&#39;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;注册ElementUI的全部组件</span><br><span class="line">Vue.use(ElementUI);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>按需加载组件</p>
+<p>ps: 借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。</p>
+<ul>
+<li><p>1.安装 babel-plugin-component：</p>
+<p>  npm install babel-plugin-component -D</p>
+</li>
+<li><p>2.将 .babelrc 修改为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [[&quot;es2015&quot;, &#123; &quot;modules&quot;: false &#125;]],</span><br><span class="line">    &quot;plugins&quot;: [</span><br><span class="line">        [</span><br><span class="line">            &quot;component&quot;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;libraryName&quot;: &quot;element-ui&quot;,</span><br><span class="line">                &quot;styleLibraryName&quot;: &quot;theme-chalk&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>3.main.js文件中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import &#123; Button, Select &#125; from &#39;element-ui&#39;;</span><br><span class="line">import App from &#39;.&#x2F;App.vue&#39;;</span><br><span class="line"></span><br><span class="line">Vue.component(Button.name, Button);</span><br><span class="line">Vue.component(Select.name, Select);</span><br><span class="line">&#x2F;* 或写为</span><br><span class="line">* Vue.use(Button)</span><br><span class="line">* Vue.use(Select)</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    render: h &#x3D;&gt; h(App)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>4.vue的组件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;el-switch</span><br><span class="line">    v-model&#x3D;&quot;value&quot;</span><br><span class="line">    active-color&#x3D;&quot;#13ce66&quot;</span><br><span class="line">    inactive-color&#x3D;&quot;#ff4949&quot;&gt;</span><br><span class="line">    &lt;&#x2F;el-switch&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            value: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="常用的组件总结："><a href="#常用的组件总结：" class="headerlink" title="常用的组件总结："></a>常用的组件总结：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-input&gt;                标签相当于input框；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-radio&gt;                标签相当于radio框；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-chekbox&gt;              标签相当于chekbox框；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload&gt;               标签相当于file上传文件；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-form&gt;                 定义表单，&lt;el-form-item&gt;定义表单中的项；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table&gt;&lt;&#x2F;el-table&gt;     定义表格相当于table，</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column&gt;         定义一行，相当于&lt;td&gt;，可以绑定数据，动态显示表格</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/23/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">luckfairy1</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端框架现状及对比"><span class="nav-number">1.</span> <span class="nav-text">前端框架现状及对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-下面通过表格说明："><span class="nav-number">1.1.</span> <span class="nav-text">1. 下面通过表格说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-与其它前端-JS-框架的关联"><span class="nav-number">1.2.</span> <span class="nav-text">2. 与其它前端 JS 框架的关联</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue基本介绍及入门"><span class="nav-number">2.</span> <span class="nav-text">Vue基本介绍及入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-介绍描述"><span class="nav-number">2.1.</span> <span class="nav-text">1. 介绍描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Vue-的特点"><span class="nav-number">2.2.</span> <span class="nav-text">2. Vue 的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-环境准备"><span class="nav-number">2.3.</span> <span class="nav-text">3. 环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-开发环境的搭建"><span class="nav-number">2.4.</span> <span class="nav-text">4. 开发环境的搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Vue项目目录结构"><span class="nav-number">2.5.</span> <span class="nav-text">5. Vue项目目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue基础学习"><span class="nav-number">3.</span> <span class="nav-text">Vue基础学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-核心思想"><span class="nav-number">3.1.</span> <span class="nav-text">Vue 核心思想</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-数据驱动（数据双向绑定）"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 数据驱动（数据双向绑定）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-组件化"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 组件化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Vue-扩展插件"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.Vue 扩展插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Vue-项目构建命令"><span class="nav-number">3.1.4.</span> <span class="nav-text">4.Vue 项目构建命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Vue-常用指令"><span class="nav-number">3.1.5.</span> <span class="nav-text">5.Vue 常用指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指令的两个缩写"><span class="nav-number">3.1.6.</span> <span class="nav-text">指令的两个缩写</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue进阶学习"><span class="nav-number">4.</span> <span class="nav-text">Vue进阶学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-number">4.1.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue路由（Vue-Router"><span class="nav-number">4.2.</span> <span class="nav-text">Vue路由（Vue-Router)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器和计算属性"><span class="nav-number">4.3.</span> <span class="nav-text">过滤器和计算属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#私有过滤器"><span class="nav-number">4.3.1.</span> <span class="nav-text">私有过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局过滤器"><span class="nav-number">4.3.2.</span> <span class="nav-text">全局过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性"><span class="nav-number">4.3.3.</span> <span class="nav-text">计算属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Axios的使用"><span class="nav-number">4.4.</span> <span class="nav-text">Axios的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI框架"><span class="nav-number">5.</span> <span class="nav-text">UI框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#element-ui-饿了么开发的vue的UI组件"><span class="nav-number">5.1.</span> <span class="nav-text">element-ui(饿了么开发的vue的UI组件)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">5.1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的组件总结："><span class="nav-number">5.1.2.</span> <span class="nav-text">常用的组件总结：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luckfairy1</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
